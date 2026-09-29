@@ -4,11 +4,16 @@ import { auth, googleProvider } from '../utils/firebase'
 import api from '../utils/axios.js';
 import Home from './pages/Home';
 import getCurrentUser from './features/getCurrentUser.js';
+import { useDispatch } from 'react-redux';
+import { setUserdata } from './redux/userSlice.js';
 
 function App() {
+
+  const dispatch=useDispatch()
 useEffect(()=>{
   const getUser=async ()=>{
-    await getCurrentUser()
+    const data=await getCurrentUser()
+    dispatch(setUserdata(data))
   }
   getUser()
 },[])
