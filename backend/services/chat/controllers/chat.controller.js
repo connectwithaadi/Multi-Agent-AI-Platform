@@ -1,5 +1,5 @@
 import Conversation from "../models/conversation.model.js"
-
+import Message from "../models/message.model.js"
 export const createConversation=async (req, res)=> {
     try {
         const userId=req.headers["x-user-id"]
@@ -9,7 +9,7 @@ export const createConversation=async (req, res)=> {
         })
         return res.status(200).json(conversation)
     } catch (error) {
-        return res.status(500).json({message:`create conversation error &{error}`})
+        return res.status(500).json({message:`create conversation error ${error}`})
     }
 }
 
@@ -22,9 +22,9 @@ export const getConversations=async (req, res)=> {
             userId:userId
         }).sort({updatedAt:-1})
 
-        return res.status(200).json(conversation)
+        return res.status(200).json(conversations)
     } catch (error) {
-        return res.status(500).json({message:`get conversation error &{error}`})
+        return res.status(500).json({message:`get conversation error ${error}`})
     }
 }
 
@@ -35,9 +35,9 @@ export const updateConversations=async (req, res)=> {
             title
         })
 
-        return res.status(200).json(conversation)
+        return res.status(200).json(conversations)
     } catch (error) {
-        return res.status(500).json({message:`update conversation error &{error}`})
+        return res.status(500).json({message:`update conversation error ${error}`})
     }
 }
 
@@ -52,7 +52,7 @@ export const saveMessage=async (req, res) => {
         })
         return res.status(200).json(message)
     } catch (error) {
-        return res.status(500).json({message:`save message error &{error}`})
+        return res.status(500).json({message:`save message error ${error}`})
     }
 }
 
@@ -65,6 +65,6 @@ export const getMessages=async (req, res) => {
         }).sort({createdAt:-1})
         return res.status(200).json(messages)
     } catch (error) {
-        return res.status(500).json({message:`get messages error &{error}`})
+        return res.status(500).json({message:`get messages error ${error}`})
     }
 }
